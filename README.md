@@ -1,6 +1,6 @@
 # 📝 Blog RAG Front — 내 블로그 AI 비서 프론트엔드
 
-> [blog-rag 백엔드](https://github.com/your-github/blog-rag) 와 연동되는 채팅 UI
+> [blog-rag 백엔드](https://github.com/Soooobiniya/blog-rag-backend.git) 와 연동되는 채팅 UI
 
 ---
 
