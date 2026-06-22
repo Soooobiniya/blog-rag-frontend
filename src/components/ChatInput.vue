@@ -1,22 +1,19 @@
 <template>
   <div class="input-area">
-    <input v-model="input" @keyup.enter="send" placeholder="블로그에 대해 질문해보세요" :disabled="loading" />
-    <button @click="send" :disabled="loading">전송</button>
+    <input v-model="input" @keyup.enter="send" placeholder="블로그에 대해 질문해보세요" :disabled="loading" class="input-box" />
+    <button class="send-btn" @click="send" :disabled="loading">
+      <i class="ti ti-arrow-up" aria-hidden="true"></i>
+    </button>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
 
-const emit = defineEmits<{
-  send: [message: string]
-}>()
+const props = defineProps<{ loading: boolean }>()
+const emit = defineEmits<{ send: [message: string] }>()
 
 const input = ref('')
-
-const props = defineProps<{
-  loading: boolean
-}>()
 
 const send = () => {
   if (!input.value.trim() || props.loading) return
@@ -27,31 +24,50 @@ const send = () => {
 
 <style scoped>
 .input-area {
+  padding: 12px 20px 16px;
+  border-top: 1px solid rgba(99, 242, 255, 0.2);
+  background: rgba(255, 255, 255, 0.4);
   display: flex;
   gap: 8px;
-  margin-top: 16px;
+  align-items: center;
 }
 
-input {
+.input-box {
   flex: 1;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1.5px solid rgba(99, 242, 255, 0.35);
+  border-radius: 12px;
   padding: 10px 14px;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  font-size: 1rem;
+  font-size: 13px;
+  color: #1a4a4a;
   outline: none;
 }
 
-button {
-  padding: 10px 20px;
-  background: #4f46e5;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 1rem;
+.input-box::placeholder {
+  color: #7abfc4;
 }
 
-button:disabled {
+.input-box:focus {
+  border-color: rgba(99, 242, 255, 0.6);
+}
+
+.send-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #63f2ff, #abf15f);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  font-size: 16px;
+  color: #1a3a2a;
+}
+
+.send-btn:disabled {
   opacity: 0.5;
+  cursor: not-allowed;
 }
 </style>
