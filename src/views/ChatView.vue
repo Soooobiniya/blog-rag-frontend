@@ -132,7 +132,12 @@ const sendMessage = async (message: string) => {
   loading.value = true
 
   try {
-    const res = await axios.post('http://localhost:8080/api/chat', { message })
+    const res = await axios.post('http://localhost:8080/api/chat', {
+      message,
+      history: messages.value
+        .slice(0, -1)
+        .map(m => ({ role: m.role, content: m.content }))
+    })
     messages.value.push({
       role: 'assistant',
       content: res.data.answer,
